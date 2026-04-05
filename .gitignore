@@ -33,3 +33,4 @@ go.work.sum
 
 pomodoro-tui
 AGENTS.md
+.crush/
