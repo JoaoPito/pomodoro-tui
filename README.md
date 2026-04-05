@@ -96,7 +96,7 @@ All fields are required. The app exits with an error if any field is missing, th
 ```bash
 # Clone the repo
 git clone https://github.com/your-user/pomodoro-tui.git
-cd pomodoro-tui
+cd pomodoro-tui/src
 
 # Install dependencies
 go mod download
@@ -118,7 +118,7 @@ go build -o pomodoro-tui .
 ```powershell
 # Clone the repo
 git clone https://github.com/your-user/pomodoro-tui.git
-cd pomodoro-tui
+cd pomodoro-tui/src
 
 # Install dependencies
 go mod download
@@ -142,20 +142,21 @@ go build -o pomodoro-tui.exe .
 ## Project Structure
 
 ```
-pomodoro-tui/
-├── main.go            # Entry point — loads config, wires client, starts Bubble Tea
-├── model.go           # Central model struct and Init/Update/View dispatch
-├── projects.go        # Projects screen
-├── tasks.go           # Tasks screen
-├── sessions.go        # Session-type picker screen
-├── timer.go           # Countdown timer screen
-├── newTask.go         # New-task form screen
-├── newTaskForm.go     # Form struct and field definitions
-├── view.go            # Shared styles (lipgloss)
-├── item.go            # list.Item adapter
-├── utils.go           # Generic Map helper
-├── apiclient/         # HTTP client, domain types, request/response DTOs
-└── config/            # Config file loading and validation
+pomodoro-tui
+└── src
+    ├── main.go            # Entry point — loads config, wires client, starts Bubble Tea
+    ├── model.go           # Central model struct and Init/Update/View dispatch
+    ├── projects.go        # Projects screen
+    ├── tasks.go           # Tasks screen
+    ├── sessions.go        # Session-type picker screen
+    ├── timer.go           # Countdown timer screen
+    ├── newTask.go         # New-task form screen
+    ├── newTaskForm.go     # Form struct and field definitions
+    ├── view.go            # Shared styles (lipgloss)
+    ├── item.go            # list.Item adapter
+    ├── utils.go           # Generic Map helper
+    ├── apiclient/         # HTTP client, domain types, request/response DTOs
+    └── config/            # Config file loading and validation
 ```
 
 ---
