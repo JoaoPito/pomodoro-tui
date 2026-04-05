@@ -17,34 +17,28 @@ A terminal UI Pomodoro / focus-session tracker built in Go with [Bubble Tea](htt
 
 ---
 
-## Navigation
+## Projects
+To manage my personal projects I'm using an abstraction of the concept of a ***Project***:
+1. Every ***Project*** has a name, creation date and is associated with a git repository
+2. Every ***Project*** can be broken down into ***Tasks***
+3. Every ***Task*** can be broken down into ***Sessions*** (Pomodoro work/break sessions)
 
-| Screen | Key | Action |
-|---|---|---|
-| Any | `ctrl+c` | Quit |
-| Projects | `↑ / ↓` | Move cursor |
-| Projects | `enter` | Open tasks for selected project |
-| Tasks | `↑ / ↓` | Move cursor |
-| Tasks | `enter` | Open session picker for selected task |
-| Tasks | `a` | Open new-task form |
-| Tasks | `c` or `tab` | Toggle completion of selected task |
-| Tasks | `b` or `backspace` | Back to projects |
-| Sessions | `↑ / ↓` | Move cursor |
-| Sessions | `enter` | Start timer |
-| Sessions | `b` or `backspace` | Back to tasks |
-| Timer | `b` or `backspace` | Stop timer and save session |
-| New task | `tab` / `shift+tab` | Next / previous field |
-| New task | `alt+enter` | Save task and return to task list |
-| New task | `esc` | Cancel and return to task list |
+For the implementation, I'm using a combination of **Postgres and n8n** for persistence and "API". This makes it easy to maintain the API implementation and make adjustments as needed.
+
+> For *pomdoro-tui* to work, **you'll need an API**
 
 ---
 
 ## Requirements
 
+### pomodoro-tui
 - **Go 1.22+** (the module uses `go 1.25.7` in `go.mod`; any recent toolchain works)
-- A running **n8n** instance (or any HTTP API) that implements the expected webhook endpoints
 - Linux: no extra dependencies (desktop notifications use DBus / libnotify)
 - Windows: no extra dependencies (notifications use the Windows Toast API)
+
+### projects API
+- A running DB (i'm using PostgreSQL)
+- A running **n8n** instance (or any HTTP API) that implements the expected webhook endpoints
 
 ---
 
@@ -139,6 +133,28 @@ go build -o pomodoro-tui.exe .
 
 ---
 
+## Navigation
+
+| Screen | Key | Action |
+|---|---|---|
+| Any | `ctrl+c` | Quit |
+| Projects | `↑ / ↓` | Move cursor |
+| Projects | `enter` | Open tasks for selected project |
+| Tasks | `↑ / ↓` | Move cursor |
+| Tasks | `enter` | Open session picker for selected task |
+| Tasks | `a` | Open new-task form |
+| Tasks | `c` or `tab` | Toggle completion of selected task |
+| Tasks | `b` or `backspace` | Back to projects |
+| Sessions | `↑ / ↓` | Move cursor |
+| Sessions | `enter` | Start timer |
+| Sessions | `b` or `backspace` | Back to tasks |
+| Timer | `b` or `backspace` | Stop timer and save session |
+| New task | `tab` / `shift+tab` | Next / previous field |
+| New task | `alt+enter` | Save task and return to task list |
+| New task | `esc` | Cancel and return to task list |
+
+---
+
 ## Project Structure
 
 ```
@@ -166,6 +182,7 @@ pomodoro-tui
 See [LICENSE](LICENSE).
 
 ## LLM Usage
-LLMs and code-assist tools have been used to build this project.
+
+LLMs and code-assist tools were used to build this project.
 - Claude Haiku/Sonnet 4.5
 - Charm's Crush
