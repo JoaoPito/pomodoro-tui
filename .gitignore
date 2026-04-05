@@ -34,3 +34,4 @@ go.work.sum
 pomodoro-tui
 AGENTS.md
 .crush/
+config.json

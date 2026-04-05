@@ -1,0 +1,11 @@
+{
+  "api_url": "https://api.personal-analytics.example/webhook/projects",
+  "api_key": "secret",
+  "device_name": "archlinux-btw",
+  "session_types": [
+    {"name": "work", "duration_minutes": 45},
+    {"name": "short work", "duration_minutes": 25},
+    {"name": "break", "duration_minutes": 5},
+    {"name": "long break", "duration_minutes": 15}
+  ]
+}
