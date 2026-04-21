@@ -87,10 +87,10 @@ func (c *Client) GetLatestProjects() ([]Project, error) {
 //		now.Location(),
 //	)
 
-	aMonthAgo := now.AddDate(0, 0, -30)
+	aYearAgo := now.AddDate(-1, 0, 0)
 	
 	request := GetLatestProjectsRequest{
-		StartEpoch: aMonthAgo.Unix(), 
+		StartEpoch: aYearAgo.Unix(), 
 		EndEpoch: now.Unix(),
 	}
 
