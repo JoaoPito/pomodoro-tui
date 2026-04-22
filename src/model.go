@@ -5,6 +5,7 @@ import (
 	tea "github.com/charmbracelet/bubbletea"
 	"github.com/charmbracelet/bubbles/list"
 	"github.com/charmbracelet/bubbles/timer"
+	"github.com/charmbracelet/bubbles/spinner"
 	"time"
 )
 
@@ -35,6 +36,7 @@ type model struct {
 
 	list 		list.Model
 	timer		timer.Model
+	spinner		spinner.Model
 	newTaskForm	newTaskForm	
 
 	availSessions 	[]sessionType
@@ -55,6 +57,7 @@ func NewModel(apiClient *api.Client, sessions []sessionType) model {
 		session: nil,
 		list: list.New(nil, list.NewDefaultDelegate(), 0, 0),
 		timer: timer.New(0),
+		spinner: CreateNewSpinner(),
 		newTaskForm: CreateNewTaskForm(),
 		availSessions: sessions,
 	}
