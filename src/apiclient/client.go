@@ -156,10 +156,22 @@ func (c *Client) UpdateTaskCompletion(id uint, completed bool) error {
 	var response UpdateTaskResponse
 	c.newRequest("PATCH", "/tasks/completed", request, &response)
 
-	if response.Success == false {
-		return fmt.Errorf(*response.Error)
+	if !response.Success {
+		return fmt.Errorf("%s", *response.Error)
 	}
 
+	return nil
+}
+
+func (c *Client) DeleteTask(id uint) error {
+	request := DeleteTaskRequest{ID: id}
+	var response DeleteTaskResponse
+	if err := c.newRequest("DELETE", "/tasks", request, &response); err != nil {
+		return err
+	}
+	if !response.Success {
+		return fmt.Errorf("%s", *response.Error)
+	}
 	return nil
 }
 

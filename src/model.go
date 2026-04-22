@@ -14,6 +14,7 @@ const (
 	sessionsView
 	timerView
 	newTaskView
+	deleteTaskView
 )
 
 type sessionType struct { 
@@ -82,6 +83,8 @@ func (m model) Update(msg tea.Msg) (tea.Model, tea.Cmd) {
 		return m.updateTimer(msg)
 	case newTaskView:
 		return m.updateNewTask(msg)
+	case deleteTaskView:
+		return m.updateDeleteTask(msg)
 	}
 
 	return m, nil

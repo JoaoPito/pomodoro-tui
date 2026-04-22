@@ -21,6 +21,12 @@ var (
 	titleStyle	= lipgloss.NewStyle().Background(hotPink).Foreground(black).Padding(0,1)
 	boldTitleStyle 	= lipgloss.NewStyle().Bold(true)
 	subTextStyle 	= lipgloss.NewStyle().Foreground(lightGray)
+	deletePopupStyle = lipgloss.NewStyle().
+				Border(lipgloss.RoundedBorder()).
+				BorderForeground(hotPink).
+				Padding(1, 4)
+	deleteConfirmStyle = lipgloss.NewStyle().Background(hotPink).Foreground(black).Padding(0,1).Bold(true)
+	deleteHintStyle    = lipgloss.NewStyle().Foreground(lightGray)
 )
 
 func (m model) View() string {
@@ -36,6 +42,8 @@ func (m model) View() string {
 			s = m.viewTimer()
 		case newTaskView:
 			s = m.viewNewTask()
+		case deleteTaskView:
+			s = m.viewDeleteTask()
 	}
 
 	return docStyle.Render(s)
