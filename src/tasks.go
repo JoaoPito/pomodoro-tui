@@ -27,6 +27,10 @@ func (m model) startTasksView() (model, tea.Cmd) {
 				key.WithKeys("c", "tab"),
 				key.WithHelp("c/tab", "toggle completed"),
 			),
+			key.NewBinding(
+				key.WithKeys("d"),
+				key.WithHelp("d", "delete task"),
+			),
 		}
 	}
 
@@ -77,6 +81,13 @@ func (m model) updateTasks(msg tea.Msg) (tea.Model, tea.Cmd) {
 		case "c", "tab":
 			m.toggleTaskCompletion()
 			return m.startTasksView()
+		
+		case "d":
+			if len(m.tasks) == 0 {
+				return m, nil
+			}
+			m.selTask = m.list.Index()
+			return m.startDeleteTaskView()
 		
 		case "ctrl+c":
 			return m, tea.Quit

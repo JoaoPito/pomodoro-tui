@@ -1,0 +1,457 @@
+{
+  "name": "Tarefas - Apagar",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "DELETE",
+        "path": "projects/tasks",
+        "authentication": "headerAuth",
+        "responseMode": "responseNode",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2.1,
+      "position": [
+        -1040,
+        -112
+      ],
+      "id": "9a9a4089-50c1-40ba-ba93-f5b8abc02b6d",
+      "name": "Webhook",
+      "webhookId": "e8d14e65-9092-4d99-947b-d26a2ea8bd1e",
+      "credentials": {
+        "httpHeaderAuth": {
+          "id": "kkZxwJD0O9dtxelq",
+          "name": "Webhook Header"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "workflowInputs": {
+          "values": [
+            {
+              "name": "id",
+              "type": "number"
+            }
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.executeWorkflowTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -1040,
+        256
+      ],
+      "id": "0716b7f5-d1bf-49df-b1e2-f517bbc79f49",
+      "name": "When Executed by Another Workflow"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "b46df12e-5b69-460c-a5b2-a290ec24929f",
+              "name": "id",
+              "value": "={{ $json.body.id }}",
+              "type": "number"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -784,
+        -112
+      ],
+      "id": "d2256c62-43cc-4fb9-8575-6e384238ecee",
+      "name": "Get request data"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -80,
+        -128
+      ],
+      "id": "4f7fc950-7740-4688-b793-7dc8e1fd1e10",
+      "name": "Respond Success"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93bfa598-4cbe-4f78-8bb6-d0067a392d62",
+              "name": "success",
+              "value": true,
+              "type": "boolean"
+            }
+          ]
+        },
+        "includeOtherFields": true,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -256,
+        -128
+      ],
+      "id": "b0aee19c-b064-4001-a0b7-43c890030f2b",
+      "name": "Success true"
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "93bfa598-4cbe-4f78-8bb6-d0067a392d62",
+              "name": "success",
+              "value": false,
+              "type": "boolean"
+            },
+            {
+              "id": "cdb858e4-2fad-474f-aa28-abcd868b29e2",
+              "name": "error",
+              "value": "={{ $json.error.message }}",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        -256,
+        160
+      ],
+      "id": "2882902f-5eb3-4a97-8d8a-d1eb19ab6ba6",
+      "name": "Success false"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "schema": {
+          "__rl": true,
+          "mode": "list",
+          "value": "public"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tasks",
+          "mode": "list",
+          "cachedResultName": "tasks"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $json.id }}",
+            "deleted_at": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "name",
+              "displayName": "name",
+              "required": true,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "project_id",
+              "displayName": "project_id",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "created_at",
+              "displayName": "created_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "completed",
+              "displayName": "completed",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "boolean",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "estimated_duration_min",
+              "displayName": "estimated_duration_min",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "deadline",
+              "displayName": "deadline",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "times_procrastinated",
+              "displayName": "times_procrastinated",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "updated_at",
+              "displayName": "updated_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "deleted_at",
+              "displayName": "deleted_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "completed_at",
+              "displayName": "completed_at",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "dateTime",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "description",
+              "displayName": "description",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": true
+            },
+            {
+              "id": "priority",
+              "displayName": "priority",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "number",
+              "canBeUsedToMatch": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.postgres",
+      "typeVersion": 2.6,
+      "position": [
+        -512,
+        64
+      ],
+      "id": "e0d7b14d-7100-44a1-8bf4-e9e50083f424",
+      "name": "Soft delete rows in a table",
+      "credentials": {
+        "postgres": {
+          "id": "tuJ6dJuAKM7y8TU9",
+          "name": "Cacambitos - Personal Metrics DB"
+        }
+      },
+      "onError": "continueErrorOutput"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "type": "n8n-nodes-base.respondToWebhook",
+      "typeVersion": 1.5,
+      "position": [
+        -80,
+        160
+      ],
+      "id": "b125ef6c-fb9a-4b0c-b00d-03ddb5e68f9e",
+      "name": "Respond Fail"
+    }
+  ],
+  "pinData": {
+    "Webhook": [
+      {
+        "json": {
+          "headers": {
+            "host": "cacambitos.joaod.com",
+            "user-agent": "curl/8.18.0",
+            "content-length": "165",
+            "accept": "*/*",
+            "accept-encoding": "gzip, br",
+            "authorization": "b05913c8-24fa-42ff-aad9-14104c71ff4e",
+            "cdn-loop": "cloudflare; loops=1",
+            "cf-connecting-ip": "177.33.140.193",
+            "cf-ipcountry": "BR",
+            "cf-ray": "9ce580ddde731225-GRU",
+            "cf-visitor": "{\"scheme\":\"https\"}",
+            "cf-warp-tag-id": "d3cd1744-2fab-4fb7-a10b-388d785aa9a3",
+            "connection": "keep-alive",
+            "content-type": "application/json",
+            "x-forwarded-for": "177.33.140.193",
+            "x-forwarded-proto": "https"
+          },
+          "params": {},
+          "query": {},
+          "body": {
+            "id": 60
+          },
+          "webhookUrl": "https://cacambitos.joaod.com/webhook-test/projects/tasks",
+          "executionMode": "test"
+        }
+      }
+    ],
+    "When Executed by Another Workflow": [
+      {
+        "json": {
+          "id": 102
+        }
+      }
+    ]
+  },
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Get request data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "When Executed by Another Workflow": {
+      "main": [
+        [
+          {
+            "node": "Soft delete rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get request data": {
+      "main": [
+        [
+          {
+            "node": "Soft delete rows in a table",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Success true": {
+      "main": [
+        [
+          {
+            "node": "Respond Success",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Success false": {
+      "main": [
+        [
+          {
+            "node": "Respond Fail",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Soft delete rows in a table": {
+      "main": [
+        [
+          {
+            "node": "Success true",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Success false",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "errorWorkflow": "buGKFsYUcx90USuA",
+    "callerPolicy": "workflowsFromSameOwner",
+    "executionTimeout": 300
+  },
+  "versionId": "31fe40a2-f25a-4eba-8aff-554aca99526b",
+  "meta": {
+    "instanceId": "cb3b3744a7581ea01adf9853d2441d15c6c75e6a368563d9cc9932d47f6ea58d"
+  },
+  "id": "tMQMsTd7o4YXu-IkD4lZP",
+  "tags": []
+}

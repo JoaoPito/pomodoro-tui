@@ -37,3 +37,7 @@ type UpdateTaskRequest struct {
 	ID		uint	`json:"id"`
 	Completed	bool	`json:"completed"`
 }
+
+type DeleteTaskRequest struct {
+	ID uint `json:"id"`
+}
