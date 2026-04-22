@@ -7,6 +7,7 @@ import (
 
 const (
 	hotPink = lipgloss.Color("13")
+	complBlue = lipgloss.Color("12")
 	darkGray = lipgloss.Color("#767676")
 	lightGray = lipgloss.Color("#808080")
 	black = lipgloss.Color("232")
@@ -27,6 +28,7 @@ var (
 				Padding(1, 4)
 	deleteConfirmStyle = lipgloss.NewStyle().Background(hotPink).Foreground(black).Padding(0,1).Bold(true)
 	deleteHintStyle    = lipgloss.NewStyle().Foreground(lightGray)
+	spinnerStyle	= lipgloss.NewStyle().Foreground(complBlue)
 )
 
 func (m model) View() string {
