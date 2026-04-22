@@ -7,6 +7,7 @@ import (
 
 const (
 	hotPink = lipgloss.Color("13")
+	complBlue = lipgloss.Color("12")
 	darkGray = lipgloss.Color("#767676")
 	lightGray = lipgloss.Color("#808080")
 	black = lipgloss.Color("232")
@@ -21,6 +22,7 @@ var (
 	titleStyle	= lipgloss.NewStyle().Background(hotPink).Foreground(black).Padding(0,1)
 	boldTitleStyle 	= lipgloss.NewStyle().Bold(true)
 	subTextStyle 	= lipgloss.NewStyle().Foreground(lightGray)
+	spinnerStyle	= lipgloss.NewStyle().Foreground(complBlue)
 )
 
 func (m model) View() string {
