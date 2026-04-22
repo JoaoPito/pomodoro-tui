@@ -2,6 +2,8 @@ package main
 
 import (
 	"log"
+	"os"
+	"path/filepath"
 
 	api "pomodoro-tui/apiclient"
 	"pomodoro-tui/config"
@@ -10,7 +12,13 @@ import (
 )
 
 func main() {
-	cfg, err := config.LoadConfig("config.json")
+	exe, err := os.Executable()
+	if err != nil {
+		log.Fatalf("unable to resolve executable path: %v", err)
+	}
+	configPath := filepath.Join(filepath.Dir(exe), "config.json")
+
+	cfg, err := config.LoadConfig(configPath)
 	if err != nil {
 		log.Fatalf("unable to load config: %v", err)
 	}
